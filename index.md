@@ -16,7 +16,10 @@ Security requirements that define what must be achieved:
 
 - **[Static Analysis v1](./standards/static-analysis/v1.json)**  
   Requirements for static application security testing (SAST) of containerized applications.
-- 
+
+- **[Catalog Approval v1](./standards/catalog-approval/v1.json)**  
+  Requirements for human approval for advancing protected environments of containerized applications.
+
 ### Attestation Schemas
 
 JSON schemas that validate attestations generated in CI/CD pipelines:
@@ -26,6 +29,9 @@ JSON schemas that validate attestations generated in CI/CD pipelines:
 
 - **[Static Analysis Attestation v1](./attestations/static-analysis/v1.json)**  
   Schema for static application security testing attestations in CycloneDX format.
+
+- **[Catalog Approval Attestation v1](./attestations/catalog-approval/v1.json)**  
+  Schema for human catalog approval attestations in CycloneDX format.
 
 ## How It Works
 
