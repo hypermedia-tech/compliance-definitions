@@ -38,7 +38,7 @@
             "properties": [
               {
                 "name": "approval-method",
-                "value": "backstage-portal"
+                "value": "dev-portal"
               },
               {
                 "name": "approver-authentication",
