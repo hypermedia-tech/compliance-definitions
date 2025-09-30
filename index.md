@@ -20,6 +20,10 @@ Security requirements that define what must be achieved:
 - **[Catalog Approval v1](./standards/catalog-approval/v1.json)**  
   Requirements for human approval for advancing protected environments of containerized applications.
 
+- **[Container Vulnerability Scan v1](./standards/container-vulnerability-scan/v1.json)**  
+  Requirements for vulnerability scans of containerized applications.
+
+
 ### Attestation Schemas
 
 JSON schemas that validate attestations generated in CI/CD pipelines:
@@ -32,6 +36,10 @@ JSON schemas that validate attestations generated in CI/CD pipelines:
 
 - **[Catalog Approval Attestation v1](./attestations/catalog-approval/v1.json)**  
   Schema for human catalog approval attestations in CycloneDX format.
+
+- **[Container Vulnerability Scan v1](./attestations/container-vulnerability-scan/v1.json)**  
+  Schema for vulnerability scan attestations in CycloneDX format.
+
 
 ## How It Works
 
