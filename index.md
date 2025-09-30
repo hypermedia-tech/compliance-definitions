@@ -11,11 +11,12 @@ If you need help implementing these standards or building secure CI/CD pipelines
 Security requirements that define what must be achieved:
 
 - **[Build Provenance v1](./standards/build-provenance/v1.json)**  
-  Requirements for establishing verifiable provenance of container image builds, ensuring traceability from source code to deployed artifact.
+  Requirements for establishing verifiable provenance of container image builds.  
+  Individual requirements are addressable via fragment identifiers (e.g., `v1.json#github-actions-build`)
 
 - **[Static Analysis v1](./standards/static-analysis/v1.json)**  
-  Requirements for static application security testing (SAST) of containerized applications prior to production deployment.
-
+  Requirements for static application security testing (SAST) of containerized applications.
+- 
 ### Attestation Schemas
 
 JSON schemas that validate attestations generated in CI/CD pipelines:
