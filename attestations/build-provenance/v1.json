@@ -1,0 +1,217 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sec.hypermedia.au/attestations/build-provenance/v1",
+  "title": "Build Provenance Attestation",
+  "description": "JSON Schema for build provenance attestations in CycloneDX format",
+  "type": "object",
+  "required": ["bomFormat", "specVersion", "version", "declarations"],
+  "properties": {
+    "bomFormat": {
+      "type": "string",
+      "enum": ["CycloneDX"],
+      "description": "Must be 'CycloneDX'"
+    },
+    "specVersion": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+$",
+      "description": "CycloneDX specification version (e.g., '1.6')"
+    },
+    "serialNumber": {
+      "type": "string",
+      "pattern": "^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "description": "Unique identifier for this attestation"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Version of this attestation document"
+    },
+    "declarations": {
+      "type": "object",
+      "required": ["assessors", "attestations", "claims"],
+      "properties": {
+        "assessors": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Entities that performed the build",
+          "items": {
+            "type": "object",
+            "required": ["bom-ref", "component"],
+            "properties": {
+              "bom-ref": {
+                "type": "string",
+                "description": "Unique identifier for this assessor"
+              },
+              "component": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the build system (e.g., 'github-actions-runner')"
+                  },
+                  "version": {
+                    "type": "string",
+                    "description": "Version of the build system"
+                  }
+                }
+              },
+              "organization": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Organization providing the build infrastructure"
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL of the organization"
+                  }
+                }
+              },
+              "thirdParty": {
+                "type": "boolean",
+                "description": "Whether this is a third-party build system"
+              }
+            }
+          }
+        },
+        "attestations": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Attestations linking claims to requirements",
+          "items": {
+            "type": "object",
+            "required": ["assessor", "map"],
+            "properties": {
+              "assessor": {
+                "type": "string",
+                "description": "Reference to assessor bom-ref"
+              },
+              "summary": {
+                "type": "string",
+                "description": "Human-readable summary of the attestation"
+              },
+              "map": {
+                "type": "array",
+                "minItems": 1,
+                "description": "Mappings between claims and requirements",
+                "items": {
+                  "type": "object",
+                  "required": ["requirement", "claims", "conformance"],
+                  "properties": {
+                    "requirement": {
+                      "type": "string",
+                      "format": "uri",
+                      "pattern": "^https://sec\\.hypermedia\\.au/standards/build-provenance/v1#",
+                      "description": "URL pointing to the requirement (must be from build-provenance standard)"
+                    },
+                    "claims": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "string",
+                        "description": "References to claim bom-refs"
+                      }
+                    },
+                    "conformance": {
+                      "type": "object",
+                      "required": ["score"],
+                      "properties": {
+                        "score": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1,
+                          "description": "Conformance score (0.0 = non-conformant, 1.0 = fully conformant)"
+                        },
+                        "rationale": {
+                          "type": "string",
+                          "description": "Explanation of the conformance score"
+                        }
+                      }
+                    },
+                    "confidence": {
+                      "type": "object",
+                      "required": ["score"],
+                      "properties": {
+                        "score": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1,
+                          "description": "Confidence in the assessment (0.0 = no confidence, 1.0 = full confidence)"
+                        },
+                        "rationale": {
+                          "type": "string",
+                          "description": "Explanation of the confidence score"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "claims": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Provenance claims being made",
+          "items": {
+            "type": "object",
+            "required": ["bom-ref", "target", "predicate"],
+            "properties": {
+              "bom-ref": {
+                "type": "string",
+                "description": "Unique identifier for this claim"
+              },
+              "target": {
+                "type": "string",
+                "description": "The artifact this claim is about (image digest or PURL)"
+              },
+              "predicate": {
+                "type": "string",
+                "enum": [
+                  "built-from-verified-source",
+                  "built-in-trusted-environment",
+                  "reproducible-builds",
+                  "cryptographically-signed",
+                  "audit-trail-complete"
+                ],
+                "description": "The provenance claim being made"
+              },
+              "rationale": {
+                "type": "string",
+                "description": "Justification for this claim"
+              },
+              "evidence": {
+                "type": "object",
+                "description": "Evidence supporting this claim",
+                "properties": {
+                  "gitSha": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{40}$",
+                    "description": "Git commit SHA"
+                  },
+                  "buildUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL to the build execution"
+                  },
+                  "workflowPath": {
+                    "type": "string",
+                    "description": "Path to the workflow definition"
+                  },
+                  "runner": {
+                    "type": "string",
+                    "description": "Build runner information"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

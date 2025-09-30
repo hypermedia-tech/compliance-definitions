@@ -1,0 +1,161 @@
+{
+  "$schema": "https://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:62b69002-8a1b-40cb-92cf-5dc712976407",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2025-09-30T00:00:00Z",
+    "authors": [
+      {
+        "name": "Hypermedia Technologies Security Team"
+      }
+    ],
+    "component": {
+      "type": "data",
+      "name": "Build Provenance Security Requirements",
+      "version": "1.0.0"
+    }
+  },
+  "definitions": {
+    "standards": [
+      {
+        "bom-ref": "build-provenance-v1",
+        "name": "Hypermedia Security: Build Provenance Requirements",
+        "version": "1.0",
+        "description": "Security requirements for establishing verifiable provenance of container image builds, ensuring traceability from source code to deployed artifact.",
+        "owner": "Hypermedia Technologies",
+        "requirements": [
+          {
+            "bom-ref": "github-actions-build",
+            "identifier": "PROV-001",
+            "title": "Trusted Build Environment",
+            "text": "All production container images MUST be built in a trusted, auditable build environment. GitHub Actions with OIDC token authentication is the approved build environment. Builds must be initiated only from the main branch and executed in ephemeral runners to prevent tampering.",
+            "descriptions": [
+                "A trusted build environment ensures that container images are built from verified source code in a controlled, auditable pipeline. GitHub Actions provides cryptographic identity binding through OIDC tokens, creating non-repudiatable build provenance."
+            ],
+            "parent": "build-provenance-v1",
+            "properties": [
+              {
+                "name": "build-platform",
+                "value": "GitHub Actions"
+              },
+              {
+                "name": "authentication-method",
+                "value": "OIDC"
+              },
+              {
+                "name": "runner-type",
+                "value": "ephemeral"
+              },
+              {
+                "name": "branch-restriction",
+                "value": "main"
+              }
+            ]
+          },
+          {
+            "bom-ref": "verified-source",
+            "identifier": "PROV-002",
+            "title": "Verified Source Code Provenance",
+            "text": "All container images MUST be built from source code in a verified Git repository with commit SHA recorded in the build provenance. The git commit SHA must be cryptographically linked to the resulting container image digest through signed attestations.",
+            "descriptions": [
+                "Source code provenance establishes the exact source code version used to build an artifact. Recording the git SHA creates bidirectional traceability between source and artifact, enabling security audits and vulnerability analysis."
+            ],
+            "parent": "github-actions-build",
+            "properties": [
+              {
+                "name": "vcs-type",
+                "value": "git"
+              },
+              {
+                "name": "commit-sha-required",
+                "value": "true"
+              },
+              {
+                "name": "signature-required",
+                "value": "true"
+              }
+            ]
+          },
+          {
+            "bom-ref": "reproducible-builds",
+            "identifier": "PROV-003",
+            "title": "Build Reproducibility",
+            "text": "Container image builds SHOULD be reproducible, meaning that building from the same source code commit with the same build parameters produces bit-identical results. Build metadata including environment variables, tool versions, and timestamps must be recorded.",
+            "descriptions": [
+              "Reproducible builds allow independent verification that a binary artifact matches its claimed source code. While not always achievable, recording detailed build metadata enables forensic analysis and supply chain verification."
+            ],
+            "parent": "github-actions-build",
+            "properties": [
+              {
+                "name": "reproducibility-level",
+                "value": "best-effort"
+              },
+              {
+                "name": "metadata-recording",
+                "value": "required"
+              },
+              {
+                "name": "tool-versions",
+                "value": "recorded"
+              }
+            ]
+          },
+          {
+            "bom-ref": "attestation-signing",
+            "identifier": "PROV-004",
+            "title": "Cryptographic Attestation Signing",
+            "text": "Build provenance attestations MUST be cryptographically signed using Sigstore/Cosign with keyless signing via GitHub Actions OIDC. Signatures must be verifiable by consumers without requiring access to private keys. All signatures must be recorded in the Sigstore transparency log (Rekor).",
+            "descriptions": [
+                "Cryptographic signing with keyless infrastructure eliminates key management burden while providing non-repudiatable proof of build identity. The transparency log provides public auditability of all signing events."
+            ],
+            "parent": "build-provenance-v1",
+            "properties": [
+              {
+                "name": "signing-method",
+                "value": "sigstore-cosign"
+              },
+              {
+                "name": "key-type",
+                "value": "keyless-oidc"
+              },
+              {
+                "name": "transparency-log",
+                "value": "rekor"
+              },
+              {
+                "name": "verification-public",
+                "value": "true"
+              }
+            ]
+          },
+          {
+            "bom-ref": "build-audit-trail",
+            "identifier": "PROV-005",
+            "title": "Complete Build Audit Trail",
+            "text": "All builds MUST record a complete audit trail including build trigger event, workflow definition, runner environment, build duration, and build URL. This audit trail must be included in the build provenance attestation and remain accessible for the lifetime of the artifact.",
+            "descriptions": [
+              "A complete audit trail enables post-incident forensics and supply chain security analysis. Recording the build URL provides a hypermedia link to the full build logs and execution context."
+            ],
+            "parent": "github-actions-build",
+            "properties": [
+              {
+                "name": "audit-fields",
+                "value": "trigger,workflow,runner,duration,url"
+              },
+              {
+                "name": "retention",
+                "value": "artifact-lifetime"
+              },
+              {
+                "name": "accessibility",
+                "value": "organization-wide"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

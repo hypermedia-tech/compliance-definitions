@@ -1,0 +1,57 @@
+{
+  "$schema": "https://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:14c52303-6e1a-425d-8ba2-249a0c5e12cf",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2025-09-30T00:00:00Z",
+    "authors": [
+      {
+        "name": "Hypermedia Au Security Team"
+      }
+    ],
+    "component": {
+      "type": "data",
+      "name": "Static Analysis Security Requirements",
+      "version": "1.0.0"
+    }
+  },
+  "definitions": {
+    "standards": [
+      {
+        "bom-ref": "static-analysis-v1",
+        "name": "Hypermedia Security: Static Analysis Requirements",
+        "version": "1.0",
+        "description": "Security requirements for static application security testing (SAST) of containerized applications prior to production deployment.",
+        "owner": "Hypermedia Technologies",
+        "requirements": [
+          {
+            "bom-ref": "codeql-scan",
+            "identifier": "SAST-001",
+            "title": "Automated SAST Scanning with CodeQL",
+            "text": "All production container images MUST undergo automated static application security testing using GitHub CodeQL (or equivalent industry-standard SAST tooling) before deployment to production environments. The scan must analyze all source code included in the container image and produce a comprehensive security report.",
+            "descriptions": [
+              "Static application security testing identifies security vulnerabilities in source code without executing the application. CodeQL is GitHub's semantic code analysis engine that treats code as data, enabling queries to discover vulnerabilities, bugs, and code smells."
+            ],
+            "parent": "static-analysis-v1",
+            "properties": [
+              {
+                "name": "category",
+                "value": "security-testing"
+              },
+              {
+                "name": "automation-required",
+                "value": "true"
+              },
+              {
+                "name": "tool-recommendation",
+                "value": "GitHub CodeQL"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
