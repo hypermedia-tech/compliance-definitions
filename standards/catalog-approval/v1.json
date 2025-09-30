@@ -46,7 +46,7 @@
               },
               {
                 "name": "target-environment",
-                "value": "production"
+                "value": "secure"
               }
             ]
           },
