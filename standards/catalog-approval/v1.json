@@ -47,18 +47,12 @@
               {
                 "name": "target-environment",
                 "value": "secure"
+              },
+              {
+                "name": "audit-fields",
+                "value": "identity,email,timestamp,justification"
               }
             ]
-          },
-          {
-            "bom-ref": "approval-audit-trail",
-            "identifier": "APPR-002",
-            "title": "Approval Audit Trail",
-            "text": "All approvals MUST be recorded with approver identity, email, timestamp, and justification. This audit trail must be cryptographically signed and remain accessible.",
-            "descriptions": [
-              "Approval audit trails enable compliance verification and incident investigation. Recording approver identity creates accountability."
-            ],
-            "parent": "catalog-approval-v1"
           }
         ]
       }
