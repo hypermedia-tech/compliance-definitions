@@ -1,0 +1,67 @@
+{
+  "$schema": "https://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:442d8177-7d1b-41f9-a78b-12f208866e75",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2025-09-30T00:00:00Z",
+    "authors": [
+      {
+        "name": "Hypermedia Au Security Team"
+      }
+    ],
+    "component": {
+      "type": "data",
+      "name": "Catalog Approval Requirements",
+      "version": "1.0.0"
+    }
+  },
+  "definitions": {
+    "standards": [
+      {
+        "bom-ref": "catalog-approval-v1",
+        "name": "Hypermedia Security: Catalog Approval Requirements",
+        "version": "1.0",
+        "description": "Human-in-the-loop approval requirements for catalog deployment to secured environments",
+        "owner": "Hypermedia Au",
+        "requirements": [
+          {
+            "bom-ref": "human-approval-required",
+            "identifier": "APPR-001",
+            "title": "Human Approval for Production",
+            "text": "Catalog artifacts MUST receive explicit human approval before deployment to secured environments. Approval must be recorded with approver identity, timestamp, and target environment.",
+            "descriptions": [
+              "Human approval provides governance and oversight for production deployments. Approvers verify that automated checks passed and exercise judgment about deployment timing and risk."
+            ],
+            "parent": "catalog-approval-v1",
+            "properties": [
+              {
+                "name": "approval-method",
+                "value": "backstage-portal"
+              },
+              {
+                "name": "approver-authentication",
+                "value": "required"
+              },
+              {
+                "name": "target-environment",
+                "value": "production"
+              }
+            ]
+          },
+          {
+            "bom-ref": "approval-audit-trail",
+            "identifier": "APPR-002",
+            "title": "Approval Audit Trail",
+            "text": "All approvals MUST be recorded with approver identity, email, timestamp, and justification. This audit trail must be cryptographically signed and remain accessible.",
+            "descriptions": [
+              "Approval audit trails enable compliance verification and incident investigation. Recording approver identity creates accountability."
+            ],
+            "parent": "catalog-approval-v1"
+          }
+        ]
+      }
+    ]
+  }
+}

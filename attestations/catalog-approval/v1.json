@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://sec.hypermedia.au/attestations/catalog-approval/v1",
+  "title": "Catalog Approval Attestation",
+  "description": "JSON Schema for human approval attestations",
+  "type": "object",
+  "required": ["bomFormat", "specVersion", "version", "declarations"],
+  "properties": {
+    "bomFormat": {
+      "type": "string",
+      "enum": ["CycloneDX"]
+    },
+    "specVersion": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+$"
+    },
+    "serialNumber": {
+      "type": "string",
+      "pattern": "^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "declarations": {
+      "type": "object",
+      "required": ["assessors", "attestations", "claims"],
+      "properties": {
+        "assessors": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["bom-ref", "component"],
+            "properties": {
+              "bom-ref": {
+                "type": "string"
+              },
+              "component": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Approver name"
+                  },
+                  "version": {
+                    "type": "string",
+                    "description": "Approver email"
+                  }
+                }
+              },
+              "thirdParty": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "claims": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["bom-ref", "target", "predicate"],
+            "properties": {
+              "predicate": {
+                "type": "string",
+                "enum": [
+                  "approved-for-production",
+                  "approval-recorded"
+                ]
+              },
+              "rationale": {
+                "type": "string",
+                "description": "Approver's justification"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
