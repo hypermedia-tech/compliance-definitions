@@ -24,7 +24,7 @@
         "name": "Hypermedia Security: Build Provenance Requirements",
         "version": "1.0",
         "description": "Security requirements for establishing verifiable provenance of container image builds, ensuring traceability from source code to deployed artifact.",
-        "owner": "Hypermedia Technologies",
+        "owner": "Hypermedia Au",
         "requirements": [
           {
             "bom-ref": "github-actions-build",
