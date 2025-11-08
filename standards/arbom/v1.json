@@ -1,0 +1,189 @@
+{
+  "$schema": "https://cyclonedx.org/schema/bom-1.7.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.7",
+  "serialNumber": "urn:uuid:8a9c2f1e-4b3d-4e8a-9c7f-2d1e3c4b5a6f",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2025-11-09T00:00:00Z",
+    "authors": [
+      {
+        "name": "Hypermedia Au Security Team"
+      }
+    ],
+    "component": {
+      "type": "data",
+      "name": "ARBOM Specification",
+      "version": "1.0.0"
+    }
+  },
+  "definitions": {
+    "standards": [
+      {
+        "bom-ref": "arbom-v1.0.0",
+        "name": "Hypermedia Security: ARBOM Specification",
+        "version": "1.0.0",
+        "description": "Arbitrary Risk Bill of Materials - Cryptographic attestation for arbitrary data blobs",
+        "owner": "Hypermedia Au",
+        "externalReferences": [
+          {
+            "type": "documentation",
+            "url": "https://github.com/sec-hypermedia/arbom-spec"
+          },
+          {
+            "type": "website",
+            "url": "https://sec.hypermedia.au"
+          }
+        ],
+        "requirements": [
+          {
+            "bom-ref": "arbom-hash-verification",
+            "identifier": "ARBOM-001",
+            "title": "Hash-Based Verification",
+            "text": "ARBOM documents MUST contain cryptographic hashes of the data blob using SHA-256 and optionally SHA-512, SHA3-256, SHA3-512, or BLAKE3. Hash calculation MUST occur before signature generation.",
+            "descriptions": [
+              "Hash-based verification ensures data integrity without storing the actual data blob. Only hash values are included in the ARBOM, creating a privacy-preserving attestation model."
+            ],
+            "parent": "arbom-v1.0.0",
+            "properties": [
+              {
+                "name": "validation-method",
+                "value": "cryptographic-hash"
+              },
+              {
+                "name": "required-algorithms",
+                "value": "SHA-256"
+              },
+              {
+                "name": "optional-algorithms",
+                "value": "SHA-512,SHA3-256,SHA3-512,BLAKE3"
+              }
+            ]
+          },
+          {
+            "bom-ref": "arbom-signature",
+            "identifier": "ARBOM-002",
+            "title": "Cryptographic Signature",
+            "text": "ARBOM documents MUST be cryptographically signed using ES256, ES384, or ES512 algorithms. Keyless signing via Sigstore Fulcio is supported for ephemeral key scenarios.",
+            "descriptions": [
+              "Cryptographic signatures provide authenticity and non-repudiation. The signature covers the entire ARBOM document including hashes, metadata, and component information."
+            ],
+            "parent": "arbom-v1.0.0",
+            "properties": [
+              {
+                "name": "signature-algorithms",
+                "value": "ES256,ES384,ES512"
+              },
+              {
+                "name": "keyless-support",
+                "value": "true"
+              },
+              {
+                "name": "fulcio-integration",
+                "value": "supported"
+              }
+            ]
+          },
+          {
+            "bom-ref": "arbom-cyclonedx-compliance",
+            "identifier": "ARBOM-003",
+            "title": "CycloneDX 1.6/1.7 Compliance",
+            "text": "ARBOM documents MUST conform to CycloneDX 1.6 or 1.7 specification with component type='data'. The document MUST include required fields: bomFormat, specVersion, serialNumber, version, metadata, components, and signature.",
+            "descriptions": [
+              "CycloneDX compliance ensures interoperability with existing BOM tooling and repositories. The 'data' component type is specifically designed for non-software artifacts."
+            ],
+            "parent": "arbom-v1.0.0",
+            "properties": [
+              {
+                "name": "spec-versions",
+                "value": "1.6,1.7"
+              },
+              {
+                "name": "component-type",
+                "value": "data"
+              }
+            ]
+          },
+          {
+            "bom-ref": "arbom-single-component-poc",
+            "identifier": "ARBOM-004",
+            "title": "Single Data Component (POC)",
+            "text": "POC implementation MUST contain exactly one data component. Multi-component ARBOMs are deferred to post-POC implementation.",
+            "descriptions": [
+              "POC scope limits complexity to single data blob attestation. This provides foundation for future multi-component scenarios."
+            ],
+            "parent": "arbom-v1.0.0",
+            "properties": [
+              {
+                "name": "poc-limitation",
+                "value": "true"
+              },
+              {
+                "name": "max-components",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "bom-ref": "arbom-metadata-requirements",
+            "identifier": "ARBOM-005",
+            "title": "Metadata Requirements",
+            "text": "ARBOM metadata MUST include timestamp, tools array (generation tool), and MAY include authors and custom properties. Properties SHOULD use 'arbom:' namespace prefix.",
+            "descriptions": [
+              "Metadata provides context about ARBOM generation including when, by whom, and using what tools. Custom properties enable extensibility for domain-specific metadata."
+            ],
+            "parent": "arbom-v1.0.0",
+            "properties": [
+              {
+                "name": "namespace-prefix",
+                "value": "arbom:"
+              },
+              {
+                "name": "required-fields",
+                "value": "timestamp,tools"
+              }
+            ]
+          },
+          {
+            "bom-ref": "arbom-text-blobs-only",
+            "identifier": "ARBOM-006",
+            "title": "Text Data Blobs Only (POC)",
+            "text": "POC implementation supports text data blobs only (JSON, YAML, XML). Binary files and PDFs are explicitly out of scope for v1.0.0.",
+            "descriptions": [
+              "Limiting scope to text data reduces implementation complexity while establishing core patterns for hash-reference attestation."
+            ],
+            "parent": "arbom-v1.0.0",
+            "properties": [
+              {
+                "name": "supported-formats",
+                "value": "JSON,YAML,XML"
+              },
+              {
+                "name": "poc-limitation",
+                "value": "true"
+              }
+            ]
+          }
+        ],
+        "properties": [
+          {
+            "name": "arbom:schema-url",
+            "value": "https://sec.hypermedia.au/schemas/arbom/v1.0.0.schema.json"
+          },
+          {
+            "name": "arbom:spec-version",
+            "value": "1.0.0-poc"
+          },
+          {
+            "name": "arbom:scope",
+            "value": "text-data-blobs"
+          },
+          {
+            "name": "arbom:fullname",
+            "value": "Arbitrary Risk Bill of Materials"
+          }
+        ]
+      }
+    ]
+  }
+}

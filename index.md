@@ -10,6 +10,10 @@ If you need help implementing these standards or building secure CI/CD pipelines
 
 Security requirements that define what must be achieved:
 
+- **[ARBOM v1](./standards/arbom/v1.json)**  
+  Requirements for Arbitrary Risk Bill of Materials - cryptographic attestation for arbitrary data blobs.  
+  Individual requirements are addressable via fragment identifiers (e.g., `v1.json#arbom-hash-verification`)
+
 - **[Build Provenance v1](./standards/build-provenance/v1.json)**  
   Requirements for establishing verifiable provenance of container image builds.  
   Individual requirements are addressable via fragment identifiers (e.g., `v1.json#github-actions-build`)
@@ -25,6 +29,13 @@ Security requirements that define what must be achieved:
 
 - **[Container Vulnerability Scan v1](./standards/container-vulnerability-scan/v1.json)**  
   Requirements for vulnerability scans of containerized applications.
+
+### BOM Schemas
+
+JSON schemas that validate custom BOM formats
+
+- **[ARBOM Schema v1](./schemas/arbom/v1.schema.json)**  
+  JSON Schema for ARBOM - ARbitrary (blob) BOM - document validation and structure compliance.
 
 
 ### Attestation Schemas
