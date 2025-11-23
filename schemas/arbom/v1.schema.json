@@ -5,8 +5,11 @@
   "description": "ARBOM schema for POC - text data blobs (JSON/YAML/XML) with hash-based verification and cryptographic signing",
   "version": "1.0.0-poc",
   "type": "object",
-  "required": ["bomFormat", "specVersion", "serialNumber", "version", "metadata", "components", "signature"],
+  "required": ["$schema", "bomFormat", "specVersion", "serialNumber", "version", "metadata", "components", "signature"],
   "properties": {
+    "$schema": {
+      "type": "string"
+    },
     "bomFormat": {
       "type": "string",
       "const": "CycloneDX"

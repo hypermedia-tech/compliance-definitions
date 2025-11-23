@@ -1,0 +1,257 @@
+{
+  "$schema": "https://cyclonedx.org/schema/bom-1.7.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.7",
+  "serialNumber": "urn:uuid:a3e8f9c2-1d4b-4a5e-9c7f-2e8d3a9b1c6e",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2025-11-23T00:00:00Z",
+    "authors": [
+      {
+        "name": "Hypermedia Au Security Team"
+      }
+    ],
+    "component": {
+      "type": "data",
+      "name": "Publish Approval Requirements",
+      "version": "1.0.0"
+    }
+  },
+  "definitions": {
+    "standards": [
+      {
+        "bom-ref": "publish-approval-v1",
+        "name": "Hypermedia Security: Publish Approval Requirements",
+        "version": "1.0",
+        "description": "Requirements for attestations that approve ARBOMs for publication or delivery to stakeholders",
+        "owner": "Hypermedia Au",
+        "requirements": [
+          {
+            "bom-ref": "target-arbom-reference",
+            "identifier": "APPR-001",
+            "title": "Target ARBOM Reference",
+            "text": "The attestation MUST explicitly reference the target ARBOM by its serial number in the claim target field. The target must be in urn:uuid format and must match the serial number of the ARBOM being approved.",
+            "descriptions": [
+              "Explicit ARBOM targeting ensures that the approval is unambiguously linked to a specific artifact. This prevents approval misattribution and enables cryptographic verification of the approval chain."
+            ],
+            "parent": "publish-approval-v1",
+            "properties": [
+              {
+                "name": "claim-target-format",
+                "value": "urn:uuid:[uuid]"
+              },
+              {
+                "name": "must-match-arbom-serial",
+                "value": "true"
+              },
+              {
+                "name": "requirement-uri",
+                "value": "https://sec.hypermedia.au/standards/approval/v1#target-arbom-reference"
+              }
+            ]
+          },
+          {
+            "bom-ref": "approval-predicate",
+            "identifier": "APPR-002",
+            "title": "Approval Predicate",
+            "text": "The claim MUST use an explicit predicate from the approved vocabulary indicating the nature of the approval. Valid predicates are: deliverable-accepted, approved-for-publication, or ready-for-delivery.",
+            "descriptions": [
+              "Standardized predicates enable consistent interpretation of approval semantics across systems. The predicate vocabulary ensures that approval intent is machine-readable and unambiguous."
+            ],
+            "parent": "publish-approval-v1",
+            "properties": [
+              {
+                "name": "allowed-predicates",
+                "value": "deliverable-accepted,approved-for-publication,ready-for-delivery"
+              },
+              {
+                "name": "must-be-in-vocabulary",
+                "value": "true"
+              },
+              {
+                "name": "requirement-uri",
+                "value": "https://sec.hypermedia.au/standards/approval/v1#approval-predicate"
+              }
+            ]
+          },
+          {
+            "bom-ref": "approval-rationale",
+            "identifier": "APPR-003",
+            "title": "Approval Rationale",
+            "text": "The claim MUST provide reasoning in the claims.reasoning field that explains the basis for the approval decision. The rationale must be non-empty and provide meaningful context.",
+            "descriptions": [
+              "Human-readable rationale enables audit trails and supports governance processes. The reasoning field captures the decision context that informed the approval."
+            ],
+            "parent": "publish-approval-v1",
+            "properties": [
+              {
+                "name": "reasoning-field",
+                "value": "claims.reasoning"
+              },
+              {
+                "name": "min-length",
+                "value": "1"
+              },
+              {
+                "name": "must-provide-context",
+                "value": "true"
+              },
+              {
+                "name": "requirement-uri",
+                "value": "https://sec.hypermedia.au/standards/approval/v1#approval-rationale"
+              }
+            ]
+          },
+          {
+            "bom-ref": "assessor-identity",
+            "identifier": "APPR-004",
+            "title": "Assessor Identity",
+            "text": "The attestation MUST identify the assessor who performed the approval with complete contact information including name and email address.",
+            "descriptions": [
+              "Assessor identification enables accountability and provides contact information for audit inquiries. The assessor's identity is linked to their cryptographic signing key."
+            ],
+            "parent": "publish-approval-v1",
+            "properties": [
+              {
+                "name": "requires-contact",
+                "value": "true"
+              },
+              {
+                "name": "requires-email",
+                "value": "true"
+              },
+              {
+                "name": "requires-name",
+                "value": "true"
+              },
+              {
+                "name": "requirement-uri",
+                "value": "https://sec.hypermedia.au/standards/approval/v1#assessor-identity"
+              }
+            ]
+          },
+          {
+            "bom-ref": "evidence-linkage",
+            "identifier": "APPR-005",
+            "title": "Evidence Linkage",
+            "text": "Claims MUST reference supporting evidence that substantiates the approval decision. Each claim must reference at least one evidence item, and all referenced evidence must exist in the declarations.evidence array.",
+            "descriptions": [
+              "Evidence linkage creates a verifiable audit trail connecting claims to supporting data. This enables reviewers to assess the basis for approval decisions."
+            ],
+            "parent": "publish-approval-v1",
+            "properties": [
+              {
+                "name": "claims-must-reference-evidence",
+                "value": "true"
+              },
+              {
+                "name": "evidence-must-exist",
+                "value": "true"
+              },
+              {
+                "name": "min-evidence-items",
+                "value": "1"
+              },
+              {
+                "name": "requirement-uri",
+                "value": "https://sec.hypermedia.au/standards/approval/v1#evidence-linkage"
+              }
+            ]
+          },
+          {
+            "bom-ref": "cryptographic-signature",
+            "identifier": "APPR-006",
+            "title": "Cryptographic Signature",
+            "text": "The attestation MUST be cryptographically signed using ES256 algorithm with a valid certificate path. The signature must include both the certificate chain and the signature value.",
+            "descriptions": [
+              "Cryptographic signatures ensure integrity and non-repudiation of the attestation. The ES256 algorithm provides strong security with efficient verification."
+            ],
+            "parent": "publish-approval-v1",
+            "properties": [
+              {
+                "name": "algorithm",
+                "value": "ES256"
+              },
+              {
+                "name": "requires-certificate-path",
+                "value": "true"
+              },
+              {
+                "name": "requires-signature-value",
+                "value": "true"
+              },
+              {
+                "name": "certificate-path-min-length",
+                "value": "1"
+              },
+              {
+                "name": "requirement-uri",
+                "value": "https://sec.hypermedia.au/standards/approval/v1#cryptographic-signature"
+              }
+            ]
+          },
+          {
+            "bom-ref": "conformance-confidence-scoring",
+            "identifier": "APPR-007",
+            "title": "Conformance and Confidence Scoring",
+            "text": "Each requirement mapping MUST include both conformance and confidence scores in the range 0-1, along with rationale explaining each score. Scores must be numeric and rationales must be non-empty strings.",
+            "descriptions": [
+              "Quantitative scoring enables risk assessment and compliance monitoring. Conformance scores measure requirement satisfaction, while confidence scores indicate assessor certainty."
+            ],
+            "parent": "publish-approval-v1",
+            "properties": [
+              {
+                "name": "conformance-score-range",
+                "value": "0-1"
+              },
+              {
+                "name": "confidence-score-range",
+                "value": "0-1"
+              },
+              {
+                "name": "requires-rationale",
+                "value": "true"
+              },
+              {
+                "name": "rationale-min-length",
+                "value": "1"
+              },
+              {
+                "name": "requirement-uri",
+                "value": "https://sec.hypermedia.au/standards/approval/v1#conformance-confidence-scoring"
+              }
+            ]
+          },
+          {
+            "bom-ref": "timestamp-requirement",
+            "identifier": "APPR-008",
+            "title": "Timestamp Requirement",
+            "text": "The attestation MUST include an ISO8601 timestamp in the metadata.timestamp field indicating when the attestation was created. The timestamp must be in valid ISO8601 format.",
+            "descriptions": [
+              "Timestamps enable temporal ordering of attestations and support audit trails. ISO8601 format ensures consistent time representation across systems."
+            ],
+            "parent": "publish-approval-v1",
+            "properties": [
+              {
+                "name": "format",
+                "value": "ISO8601"
+              },
+              {
+                "name": "field",
+                "value": "metadata.timestamp"
+              },
+              {
+                "name": "must-be-valid",
+                "value": "true"
+              },
+              {
+                "name": "requirement-uri",
+                "value": "https://sec.hypermedia.au/standards/approval/v1#timestamp-requirement"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

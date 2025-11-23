@@ -57,6 +57,9 @@ JSON schemas that validate attestations generated in CI/CD pipelines:
 - **[Container Vulnerability Scan v1](./attestations/container-vulnerability-scan/v1.json)**  
   Schema for vulnerability scan attestations in CycloneDX format.
 
+- **[Publish Approval Attestation v1](./attestations/catalog-approval/v1.json)**  
+  Schema for publishing approval attestations in CycloneDX format.
+
 
 ## How It Works
 
