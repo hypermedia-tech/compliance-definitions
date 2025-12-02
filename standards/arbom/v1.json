@@ -79,6 +79,10 @@
                 "value": "https://sec.hypermedia.au/standards/arbom/v1#arbom-signature"
               },
               {
+                "name": "validation-method",
+                "value": "cryptographic-signature"
+              },
+              {
                 "name": "signature-algorithms",
                 "value": "ES256,ES384,ES512"
               },
@@ -107,6 +111,14 @@
                 "value": "https://sec.hypermedia.au/standards/arbom/v1#arbom-cyclonedx-compliance"
               },
               {
+                "name": "validation-method",
+                "value": "field-presence"
+              },
+              {
+                "name": "required-fields",
+                "value": "bomFormat,specVersion,serialNumber,version,metadata,components,signature"
+              },
+              {
                 "name": "spec-versions",
                 "value": "1.6,1.7"
               },
@@ -117,32 +129,8 @@
             ]
           },
           {
-            "bom-ref": "arbom-single-component-poc",
-            "identifier": "ARBOM-004",
-            "title": "Single Data Component (POC)",
-            "text": "POC implementation MUST contain exactly one data component. Multi-component ARBOMs are deferred to post-POC implementation.",
-            "descriptions": [
-              "POC scope limits complexity to single data blob attestation. This provides foundation for future multi-component scenarios."
-            ],
-            "parent": "arbom-v1.0.0",
-            "properties": [
-              {
-                "name": "requirement-uri",
-                "value": "https://sec.hypermedia.au/standards/arbom/v1#arbom-single-component-poc"
-              },
-              {
-                "name": "poc-limitation",
-                "value": "true"
-              },
-              {
-                "name": "max-components",
-                "value": "1"
-              }
-            ]
-          },
-          {
             "bom-ref": "arbom-metadata-requirements",
-            "identifier": "ARBOM-005",
+            "identifier": "ARBOM-004",
             "title": "Metadata Requirements",
             "text": "ARBOM metadata MUST include timestamp, tools array (generation tool), and MAY include authors and custom properties. Properties SHOULD use 'arbom:' namespace prefix.",
             "descriptions": [
@@ -160,31 +148,7 @@
               },
               {
                 "name": "required-fields",
-                "value": "timestamp,tools"
-              }
-            ]
-          },
-          {
-            "bom-ref": "arbom-text-blobs-only",
-            "identifier": "ARBOM-006",
-            "title": "Text Data Blobs Only (POC)",
-            "text": "POC implementation supports text data blobs only (JSON, YAML, XML). Binary files and PDFs are explicitly out of scope for v1.0.0.",
-            "descriptions": [
-              "Limiting scope to text data reduces implementation complexity while establishing core patterns for hash-reference attestation."
-            ],
-            "parent": "arbom-v1.0.0",
-            "properties": [
-              {
-                "name": "requirement-uri",
-                "value": "https://sec.hypermedia.au/standards/arbom/v1#arbom-text-blobs-only"
-              },
-              {
-                "name": "supported-formats",
-                "value": "JSON,YAML,XML"
-              },
-              {
-                "name": "poc-limitation",
-                "value": "true"
+                "value": "metadata.timestamp,metadata.tools"
               }
             ]
           }
