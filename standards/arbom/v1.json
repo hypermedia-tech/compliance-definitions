@@ -143,6 +143,10 @@
                 "value": "https://sec.hypermedia.au/standards/arbom/v1#arbom-metadata-requirements"
               },
               {
+                "name": "validation-method",
+                "value": "field-presence"
+              },
+              {
                 "name": "namespace-prefix",
                 "value": "arbom:"
               },
