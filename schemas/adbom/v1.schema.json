@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://sec.hypermedia.au/schemas/arbom/v1.0.0.schema.json",
-  "title": "ARBOM v1.0.0 Schema",
-  "description": "ARBOM schema for POC - text data blobs (JSON/YAML/XML) with hash-based verification and cryptographic signing",
+  "$id": "https://sec.hypermedia.au/schemas/adbom/v1.0.0.schema.json",
+  "title": "ADBOM v1.0.0 Schema",
+  "description": "ADBOM schema for POC - text data blobs (JSON/YAML/XML) with hash-based verification and cryptographic signing",
   "version": "1.0.0-poc",
   "type": "object",
   "required": ["$schema", "bomFormat", "specVersion", "serialNumber", "version", "metadata", "components", "signature"],
@@ -26,7 +26,7 @@
     "version": {
       "type": "integer",
       "minimum": 1,
-      "description": "ARBOM document version"
+      "description": "ADBOM document version"
     },
     "metadata": {
       "type": "object",
