@@ -23,16 +23,16 @@
         "bom-ref": "publish-approval-v1",
         "name": "Hypermedia Security: Publish Approval Requirements",
         "version": "1.0",
-        "description": "Requirements for attestations that approve ARBOMs for publication or delivery to stakeholders",
+        "description": "Requirements for attestations that approve ADBOMs for publication or delivery to stakeholders",
         "owner": "Hypermedia Au",
         "requirements": [
           {
-            "bom-ref": "target-arbom-reference",
+            "bom-ref": "target-adbom-reference",
             "identifier": "APPR-001",
-            "title": "Target ARBOM Reference",
-            "text": "The attestation MUST explicitly reference the target ARBOM by its serial number in the claim target field. The target must be in urn:uuid format and must match the serial number of the ARBOM being approved.",
+            "title": "Target ADBOM Reference",
+            "text": "The attestation MUST explicitly reference the target ADBOM by its serial number in the claim target field. The target must be in urn:uuid format and must match the serial number of the ADBOM being approved.",
             "descriptions": [
-              "Explicit ARBOM targeting ensures that the approval is unambiguously linked to a specific artifact. This prevents approval misattribution and enables cryptographic verification of the approval chain."
+              "Explicit ADBOM targeting ensures that the approval is unambiguously linked to a specific artifact. This prevents approval misattribution and enables cryptographic verification of the approval chain."
             ],
             "parent": "publish-approval-v1",
             "properties": [
@@ -41,12 +41,12 @@
                 "value": "urn:uuid:[uuid]"
               },
               {
-                "name": "must-match-arbom-serial",
+                "name": "must-match-adbom-serial",
                 "value": "true"
               },
               {
                 "name": "requirement-uri",
-                "value": "https://sec.hypermedia.au/standards/approval/v1#target-arbom-reference"
+                "value": "https://sec.hypermedia.au/standards/approval/v1#target-adbom-reference"
               }
             ]
           },

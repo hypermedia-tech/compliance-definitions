@@ -13,22 +13,22 @@
     ],
     "component": {
       "type": "data",
-      "name": "ARBOM Specification",
+      "name": "ADBOM Specification",
       "version": "1.0.0"
     }
   },
   "definitions": {
     "standards": [
       {
-        "bom-ref": "arbom-v1.0.0",
-        "name": "Hypermedia Security: ARBOM Specification",
+        "bom-ref": "adbom-v1.0.0",
+        "name": "Hypermedia Security: ADBOM Specification",
         "version": "1.0.0",
         "description": "Arbitrary Risk Bill of Materials - Cryptographic attestation for arbitrary data blobs",
         "owner": "Hypermedia Au",
         "externalReferences": [
           {
             "type": "documentation",
-            "url": "https://github.com/sec-hypermedia/arbom-spec"
+            "url": "https://github.com/sec-hypermedia/adbom-spec"
           },
           {
             "type": "website",
@@ -37,18 +37,18 @@
         ],
         "requirements": [
           {
-            "bom-ref": "arbom-hash-verification",
-            "identifier": "ARBOM-001",
+            "bom-ref": "adbom-hash-verification",
+            "identifier": "ADBOM-001",
             "title": "Hash-Based Verification",
-            "text": "ARBOM documents MUST contain cryptographic hashes of the data blob using SHA-256 and optionally SHA-512, SHA3-256, SHA3-512, or BLAKE3. Hash calculation MUST occur before signature generation.",
+            "text": "ADBOM documents MUST contain cryptographic hashes of the data blob using SHA-256 and optionally SHA-512, SHA3-256, SHA3-512, or BLAKE3. Hash calculation MUST occur before signature generation.",
             "descriptions": [
-              "Hash-based verification ensures data integrity without storing the actual data blob. Only hash values are included in the ARBOM, creating a privacy-preserving attestation model."
+              "Hash-based verification ensures data integrity without storing the actual data blob. Only hash values are included in the ADBOM, creating a privacy-preserving attestation model."
             ],
-            "parent": "arbom-v1.0.0",
+            "parent": "adbom-v1.0.0",
             "properties": [
               {
                 "name": "requirement-uri",
-                "value": "https://sec.hypermedia.au/standards/arbom/v1#arbom-hash-verification"
+                "value": "https://sec.hypermedia.au/standards/adbom/v1#adbom-hash-verification"
               },
               {
                 "name": "validation-method",
@@ -65,18 +65,18 @@
             ]
           },
           {
-            "bom-ref": "arbom-signature",
-            "identifier": "ARBOM-002",
+            "bom-ref": "adbom-signature",
+            "identifier": "ADBOM-002",
             "title": "Cryptographic Signature",
-            "text": "ARBOM documents MUST be cryptographically signed using ES256, ES384, or ES512 algorithms. Keyless signing via Sigstore Fulcio is supported for ephemeral key scenarios.",
+            "text": "ADBOM documents MUST be cryptographically signed using ES256, ES384, or ES512 algorithms. Keyless signing via Sigstore Fulcio is supported for ephemeral key scenarios.",
             "descriptions": [
-              "Cryptographic signatures provide authenticity and non-repudiation. The signature covers the entire ARBOM document including hashes, metadata, and component information."
+              "Cryptographic signatures provide authenticity and non-repudiation. The signature covers the entire ADBOM document including hashes, metadata, and component information."
             ],
-            "parent": "arbom-v1.0.0",
+            "parent": "adbom-v1.0.0",
             "properties": [
               {
                 "name": "requirement-uri",
-                "value": "https://sec.hypermedia.au/standards/arbom/v1#arbom-signature"
+                "value": "https://sec.hypermedia.au/standards/adbom/v1#adbom-signature"
               },
               {
                 "name": "validation-method",
@@ -97,18 +97,18 @@
             ]
           },
           {
-            "bom-ref": "arbom-cyclonedx-compliance",
-            "identifier": "ARBOM-003",
+            "bom-ref": "adbom-cyclonedx-compliance",
+            "identifier": "ADBOM-003",
             "title": "CycloneDX 1.6/1.7 Compliance",
-            "text": "ARBOM documents MUST conform to CycloneDX 1.6 or 1.7 specification with component type='data'. The document MUST include required fields: bomFormat, specVersion, serialNumber, version, metadata, components, and signature.",
+            "text": "ADBOM documents MUST conform to CycloneDX 1.6 or 1.7 specification with component type='data'. The document MUST include required fields: bomFormat, specVersion, serialNumber, version, metadata, components, and signature.",
             "descriptions": [
               "CycloneDX compliance ensures interoperability with existing BOM tooling and repositories. The 'data' component type is specifically designed for non-software artifacts."
             ],
-            "parent": "arbom-v1.0.0",
+            "parent": "adbom-v1.0.0",
             "properties": [
               {
                 "name": "requirement-uri",
-                "value": "https://sec.hypermedia.au/standards/arbom/v1#arbom-cyclonedx-compliance"
+                "value": "https://sec.hypermedia.au/standards/adbom/v1#adbom-cyclonedx-compliance"
               },
               {
                 "name": "validation-method",
@@ -129,18 +129,18 @@
             ]
           },
           {
-            "bom-ref": "arbom-metadata-requirements",
-            "identifier": "ARBOM-004",
+            "bom-ref": "adbom-metadata-requirements",
+            "identifier": "ADBOM-004",
             "title": "Metadata Requirements",
-            "text": "ARBOM metadata MUST include timestamp, tools array (generation tool), and MAY include authors and custom properties. Properties SHOULD use 'arbom:' namespace prefix.",
+            "text": "ADBOM metadata MUST include timestamp, tools array (generation tool), and MAY include authors and custom properties. Properties SHOULD use 'adbom:' namespace prefix.",
             "descriptions": [
-              "Metadata provides context about ARBOM generation including when, by whom, and using what tools. Custom properties enable extensibility for domain-specific metadata."
+              "Metadata provides context about ADBOM generation including when, by whom, and using what tools. Custom properties enable extensibility for domain-specific metadata."
             ],
-            "parent": "arbom-v1.0.0",
+            "parent": "adbom-v1.0.0",
             "properties": [
               {
                 "name": "requirement-uri",
-                "value": "https://sec.hypermedia.au/standards/arbom/v1#arbom-metadata-requirements"
+                "value": "https://sec.hypermedia.au/standards/adbom/v1#adbom-metadata-requirements"
               },
               {
                 "name": "validation-method",
@@ -148,7 +148,7 @@
               },
               {
                 "name": "namespace-prefix",
-                "value": "arbom:"
+                "value": "adbom:"
               },
               {
                 "name": "required-fields",
@@ -159,19 +159,19 @@
         ],
         "properties": [
           {
-            "name": "arbom:schema-url",
-            "value": "https://sec.hypermedia.au/schemas/arbom/v1.0.0.schema.json"
+            "name": "adbom:schema-url",
+            "value": "https://sec.hypermedia.au/schemas/adbom/v1.0.0.schema.json"
           },
           {
-            "name": "arbom:spec-version",
+            "name": "adbom:spec-version",
             "value": "1.0.0-poc"
           },
           {
-            "name": "arbom:scope",
+            "name": "adbom:scope",
             "value": "text-data-blobs"
           },
           {
-            "name": "arbom:fullname",
+            "name": "adbom:fullname",
             "value": "Arbitrary Risk Bill of Materials"
           }
         ]
